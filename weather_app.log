@@ -2,3 +2,32 @@
 2025-01-24 11:48:47,128 - INFO - Weather data for city shiraz successfully received
 2025-01-24 11:49:06,527 - INFO - Weather data for city Tehran successfully received
 2025-01-24 11:49:11,874 - INFO - Weather data for city Tehran successfully received
+2025-01-24 11:51:55,398 - INFO - Weather data for city Tehran successfully received
+2025-01-24 11:55:59,813 - ERROR - Error getting weather data: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Tehran&appid=24ebee4c281907fa73640f7e3f5dd073 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000029B9EDFD7F0>: Failed to resolve 'api.openweathermap.org' ([Errno 11001] getaddrinfo failed)"))
+2025-01-24 11:56:00,783 - ERROR - Error getting weather data: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Tehran&appid=24ebee4c281907fa73640f7e3f5dd073 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000029B9FA7F560>: Failed to resolve 'api.openweathermap.org' ([Errno 11001] getaddrinfo failed)"))
+2025-01-24 11:56:01,294 - ERROR - Error getting weather data: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Tehran&appid=24ebee4c281907fa73640f7e3f5dd073 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000029BA05DA390>: Failed to resolve 'api.openweathermap.org' ([Errno 11001] getaddrinfo failed)"))
+2025-01-24 11:56:01,721 - ERROR - Error getting weather data: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Tehran&appid=24ebee4c281907fa73640f7e3f5dd073 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000029BA05EEF00>: Failed to resolve 'api.openweathermap.org' ([Errno 11001] getaddrinfo failed)"))
+2025-01-24 11:57:30,650 - INFO - Weather data for city Tehran successfully received
+2025-01-24 11:57:36,334 - INFO - Weather data for city Tehran successfully received
+2025-01-24 11:57:42,160 - INFO - Weather data for city Tehran successfully received
+2025-01-24 11:57:47,513 - INFO - Weather data for city Tehran successfully received
+2025-01-24 11:57:52,863 - INFO - Weather data for city shi successfully received
+2025-01-24 11:57:58,212 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:00:01,051 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:00:11,418 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:00:21,772 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:00:32,455 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:00:42,788 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:00:53,107 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:01:06,540 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:01:17,290 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:01:28,073 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:01:38,825 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:01:49,555 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:02:00,328 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:02:11,076 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:02:21,836 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:02:32,608 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:02:43,398 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:02:54,145 - INFO - Weather data for city shiraz successfully received
+2025-01-24 12:03:04,924 - INFO - Weather data for city shiraz successfully received
