@@ -1,5 +1,9 @@
-# Auto detect text files and perform LF normalization
-* *.java linguist-detectable=true
-*.js linguist-detectable=false
+# Python files
+*.py linguist-detectable=true
+*.py linguist-language=Python
+
+# Ignore other files
 *.html linguist-detectable=false
+*.css linguist-detectable=false
+*.js linguist-detectable=false
 *.xml linguist-detectable=false
