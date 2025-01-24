@@ -1,9 +1,14 @@
-# Python files
+# Force Python as main language
+* linguist-vendored
+*.py linguist-vendored=false
+*.py linguist-generated=false
+*.py linguist-documentation=false
 *.py linguist-detectable=true
 *.py linguist-language=Python
 
-# Ignore other files
-*.html linguist-detectable=false
-*.css linguist-detectable=false
-*.js linguist-detectable=false
-*.xml linguist-detectable=false
+# Explicitly mark other files as non-Python
+*.html linguist-vendored=true
+*.css linguist-vendored=true
+*.js linguist-vendored=true
+*.xml linguist-vendored=true
+*.md linguist-documentation=true
