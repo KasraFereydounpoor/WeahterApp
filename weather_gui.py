@@ -6,6 +6,7 @@ from weather_core import WeatherCore
 import base64
 import tempfile
 import os
+from PIL import Image, ImageTk
 
 class WeatherApp:
     def __init__(self):
@@ -15,7 +16,9 @@ class WeatherApp:
         self.root.resizable(False, False)
         
         # تنظیم آیکون برنامه
-        self.set_app_icon()
+        icon_path = "weather_icon.png"  # فایل آیکون باید در همین مسیر باشه
+        if os.path.exists(icon_path):
+            self.root.iconbitmap(icon_path)
         
         # تنظیم تم پیش‌فرض و رنگ‌ها
         self.is_dark_mode = False
@@ -26,40 +29,6 @@ class WeatherApp:
         self.setup_header()
         self.setup_gui()
         self.running = False
-
-    def set_app_icon(self):
-        """تنظیم آیکون برنامه"""
-        # آیکون به صورت base64
-        icon_data = """
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA
-        7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAMASURBVFiF7ZZN
-        iBtVGIafb2aSzGQymWQmu7Pr/nRXa10p/lAUqnXxUBD0IIqCUBQKngQP3r0IghfBkwh6Fg8iCFYUDxVE
-        UGqFIq092KV2t9t1dzvJJJnM/H0eJtm4ye5m0pUIffeTgeTL+z7v9+bLd+Aa/u/QrkbIGPPsc8/0Xejr
-        b9yXNxKxnR0dYRgSRRGu6xKGIVprms0mQRDgOA6u6xKGYfu5rmvCMCQIgrZGFEWEYYjrujiOQxAEbY3/
-        hNaawWCQer3O7OwsDx+f4L4jR7F0RKVSplqtUiqVKBaLVCoVKpUKxWKRUqlEuVymUqlQKpUol8tUq1VK
-        pRKVSoVyuUy1WqVcLlOr1ahWq5TLZer1OtVqlXK5TK1Wo1KpUKlU2N7eJooibMep1Wp0d3f/qxNaa3p7
-        e+nt7WVwcJCBgQH6+/vp6+ujp6eH7u5uenp66O7upquri87OTrq6uujo6KC7u5vu7m46Ozvp6uqio6OD
-        zs5OHMdhfX2dWq3G0tISs7OzTE9PMzU1xfT0NDMzM8zNzbG4uMjKygqbm5usr6+zs7NDEAQopZBSopRC
-        KdX+llJijEFrjVIKYwxKKbTWGGPQWqOUQkqJlBKtNVJKjDHt2BiDlBKlFFJKoigiDEOUUkRRhFKKKIow
-        xrSPbKUUxhiMMW2NKIowxrR/G2MwxrR/G2MwxrQbVEoRRRFRFBFFUfu7vQP7RZIkJEly4H2SJMRxTJIk
-        xHFMkiQkSUIcx8RxTBzHJElCHMckSUIcx8RxTBzH7OzssLW1RaFQYGFhgfn5eRYWFpifn2dxcZGlpSVW
-        V1fZ2NhgY2ODra0ttra22NzcZHt7m+3tbTY3N9na2mJra4utrS22t7fZ3Nxka2uLjY0NNjY22NzcZHNz
-        k42NDba3t9ne3mZra4sgCNBaY/f09KCUQkqJMQatNcaY9sC11m1nWh601u2Taa3RWrfFW8IHxbXWSCnb
-        J1NKobVuD7y1qFYjrQvVarT1rrVGKdVWa2m0Tm6MQSmFlLI98FYjLXf2N3kV+BPZvfTkag0HkwAAAABJ
-        RU5ErkJggg==
-        """
-        
-        # ذخیره آیکون در یک فایل موقت
-        icon_data_decoded = base64.b64decode(icon_data)
-        temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.ico')
-        temp_file.write(icon_data_decoded)
-        temp_file.close()
-        
-        # تنظیم آیکون
-        self.root.iconbitmap(temp_file.name)
-        
-        # حذف فایل موقت
-        os.unlink(temp_file.name)
 
     def setup_colors(self):
         """تنظیم پالت رنگی برنامه"""
@@ -236,11 +205,16 @@ class WeatherApp:
         except ValueError as e:
             self.status_label.configure(text=f"Error: {str(e)}")
             return
-
+        
+        self.city = self.city_entry.get().strip()
+        if not self.city:
+            self.status_label.configure(text="Error: Please enter a city name")
+            return
+        
         self.running = True
         self.start_button.configure(state="disabled")
         self.stop_button.configure(state="normal")
-        self.status_label.configure(text="Status: Running")
+        self.status_label.configure(text="Status: Monitoring...")
         
         self.monitor_thread = threading.Thread(target=self.monitor_weather)
         self.monitor_thread.daemon = True
@@ -255,15 +229,13 @@ class WeatherApp:
     def monitor_weather(self):
         while self.running:
             try:
-                city = self.city_entry.get()
-                weather_data = self.weather_core.get_current_weather(city)
+                weather_data = self.weather_core.get_current_weather(self.city)
                 
                 self.temp_label.configure(text=f"Temperature: {weather_data['temp']}°C")
                 self.humidity_label.configure(text=f"Humidity: {weather_data['humidity']}%")
                 self.condition_label.configure(text=f"Condition: {weather_data['condition']}")
                 self.time_label.configure(text=f"Last Update: {datetime.now().strftime('%H:%M:%S')}")
-                
-                self.status_label.configure(text="Status: Data updated successfully")
+                self.status_label.configure(text="Status: Updated successfully")
                 
             except Exception as e:
                 self.status_label.configure(text=f"Error: {str(e)}")
@@ -308,8 +280,6 @@ class WeatherApp:
         self.refresh_ui()
 
     def refresh_ui(self):
-        """به‌روزرسانی رنگ‌های رابط کاربری"""
-        # به‌روزرسانی دکمه‌ها
         self.theme_button.configure(
             fg_color=self.primary_color,
             hover_color=self.secondary_color
@@ -319,10 +289,18 @@ class WeatherApp:
             hover_color=self.secondary_color
         )
         
-        # به‌روزرسانی رنگ متن‌ها
-        for widget in [self.temp_label, self.humidity_label, 
-                      self.condition_label, self.time_label,
-                      self.status_label, self.title_label]:
+        # به‌روزرسانی همه لیبل‌ها
+        for widget in [
+            self.temp_label, 
+            self.humidity_label, 
+            self.condition_label, 
+            self.time_label,
+            self.status_label,
+            self.title_label,
+            self.city_label,
+            self.refresh_label,
+            self.card_title
+        ]:
             widget.configure(text_color=self.text_color)
 
 def main():

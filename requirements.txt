@@ -1,12 +1,16 @@
 
-
-# https://github.com/KasraFereydounpoorcertifi==2024.12.14
-
+altgraph==0.17.4
+certifi==2024.12.14
 charset-normalizer==3.4.1
 customtkinter==5.2.2
 darkdetect==0.8.0
 idna==3.10
 packaging==24.2
+pefile==2023.2.7
 pillow==11.1.0
+pyinstaller==6.11.1
+pyinstaller-hooks-contrib==2025.0
+pywin32-ctypes==0.2.3
 requests==2.32.3
+setuptools==75.8.0
 urllib3==2.3.0
